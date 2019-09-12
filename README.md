@@ -1,6 +1,6 @@
 # SF4-POC-API
 Starter SF4 kit : API,  EASYADMIN, CUSTOM COMMAND LINE
-\n
+
 Please follow those steps:
 1- docker-compose build --no-cache 
 2- docker-compose up -d

@@ -1,0 +1,12 @@
+easy_admin:
+    entities:
+        User:
+            list:
+                actions:
+                     - { name: 'user_posts', type: 'route' }
+                     - { name: 'delete'}
+                     - { name: 'edit'}
+            class: App\Entity\User
+
+        Post:
+            class: App\Entity\Post

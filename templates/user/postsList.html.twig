@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title user.name %}
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="container">
+            <div class="col-4">
+                <a href="/admin">Back</a>
+            </div>
+            <div class="col-8">
+                <h2>{{ user.name }} Posts</h2>
+                <div class="row">
+                    <ul>
+                    {% for post in user.posts %}
+                        <li>
+                            <div class="col-md-4 mb-4">
+                                {{ post.title}} :
+                            </div>
+                            <div class="col-md-8 ml-6">
+                                {{ post.body }}
+                            </div>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

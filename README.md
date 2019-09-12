@@ -1,8 +1,8 @@
 # SF4-POC-API
 Starter SF4 kit : API,  EASYADMIN, CUSTOM COMMAND LINE
-
+\n
 Please follow those steps:
-1- docker-compose build --no-cache
+1- docker-compose build --no-cache 
 2- docker-compose up -d
 3- docker exec -ti sf4_php_poc php /home/wwwroot/sf4_poc/bin/console doctrine:schema:update --force
 4- In order to run the custom command : 

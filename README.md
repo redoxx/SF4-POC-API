@@ -7,9 +7,11 @@ Please follow those steps:
 
 2- docker-compose up -d
 
-3- docker exec -ti sf4_php_poc php /home/wwwroot/sf4_poc/bin/console doctrine:schema:update --force
+3- docker exec -ti sf4_php_poc composer install
 
-4- In order to run the custom command : 
+4- docker exec -ti sf4_php_poc php /home/wwwroot/sf4_poc/bin/console doctrine:schema:update --force
+
+5- In order to run the custom command : 
 
    docker exec -ti sf4_php_poc php /home/wwwroot/sf4_poc/bin/console app:import-users
    

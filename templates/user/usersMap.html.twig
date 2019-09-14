@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link type="text/css" rel="stylesheet" href="{{ asset('styles.css') }}" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""/>
+{% endblock %}
+
+{% block title 'Users Map' %}
+
+{% block body %}
+        <div class="container">
+            <H1>User Map</H1>
+            <H2 id="loader">Loading...</H2>
+            <div id="mapid"></div>
+        </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+            integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+            crossorigin="">
+    </script>
+    <script>
+        //TODO refactoring in js file
+        $.ajax({
+            url:'/AjaxUserGeo',
+            type: "POST",
+            dataType: "json",
+            data: {},
+            async: true,
+            success: function (data)
+            {
+                var mymap = L.map('mapid').setView([ data[0]['lat'], data[0]['long'] ], 2);
+                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                    maxZoom: 10,
+                    id: 'mapbox.streets',
+                    accessToken: 'pk.eyJ1IjoicmVkb3hnZW51czY5IiwiYSI6ImNrMGh6dmh6djA3OW8zaXA1dDA3eGYxa24ifQ.aoKS5PsFip6HxcYeK4ktOA'
+                }).addTo(mymap);
+                // place markers
+                $.each(data, function(i, val) {
+                    var marker = L.marker([ val['lat'], val['long'] ]).addTo(mymap);
+                    marker.bindPopup("<b>" + val['username'] + "</b>").openPopup();
+                });
+
+                //hide loader
+                $('#loader').hide();
+            }
+        });
+    </script>
+{% endblock %}

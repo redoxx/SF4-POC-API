@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Entity\Post;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User
